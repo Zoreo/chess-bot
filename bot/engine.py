@@ -2,21 +2,6 @@ import math
 import chess
 from bot.evaluation import evaluate_board_material
 
-def score_move(board: chess.Board, move: chess.Move) -> int:
-    # Prefer captures (MVV-LVA), promotions, and checks
-    score = 0
-    if board.is_capture(move):
-        target = board.piece_at(move.to_square)
-        attacker = board.piece_at(move.from_square)
-        if target:
-            score += 10 * target.piece_type - attacker.piece_type  # MVV-LVA
-    if board.gives_check(move):
-        score += 5
-    if move.promotion:
-        score += 20
-    return score
-
-
 def minimax_ab(board: chess.Board, depth: int, alpha: float, beta: float, is_maximizing: bool):
     if depth == 0 or board.is_game_over():
         return evaluate_board_material(board), None
