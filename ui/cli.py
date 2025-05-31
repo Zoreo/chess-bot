@@ -10,7 +10,7 @@ def get_player_move(board):
     while True:
         user_input = input("Your move (e.g., e2e4): ").strip()
         if user_input in ("exit", "quit"):
-            return None  # Signal to stop
+            return None
         try:
             move = chess.Move.from_uci(user_input)
             if move in board.legal_moves:
@@ -28,7 +28,7 @@ def play_vs_bot(depth:int):
     while not board.is_game_over():
         if board.turn == chess.WHITE:
             move = get_player_move(board)
-            if move is None:  # <- ADD THIS GUARD
+            if move is None:
                 print("Exiting game...")
             return
         else:
